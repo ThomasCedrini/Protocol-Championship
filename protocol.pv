@@ -1,0 +1,21 @@
+P :=
+    ν privA .ν privB .ν privC .
+    out(c, pub(privA)).out(c, pub(privB )).out(c, privC ).
+        !(ν NA.PA(privA, pub(privB), A, B, NA)) | !(ν NA.PA(privA, pub(privC), A, C, NA)) |
+        !(ν NB.PB(privB, pub(privA), A, B, NB)) | !(ν NB.PB(privB, pub(privC), A, C, NB))
+        !(ν NA.PA(privB , pub(privA), B, A, NA)) | !(ν NA.PA(privB, pub(privC), B, C, NA))
+
+PA(privA, pubB , A, B, NA):=
+    out(c, enca(pair(A, NA), pubB )).
+    in(c,x).
+        let z = deca(x,privA) in
+            if NA = π1(z) then
+                let y = π2(z) in
+                    out(c , enca(y , pubB ))
+
+PB(privB , pubA, A, B, NB ):=
+    in(c,x).
+        let (= A,y) = deca(x,privB) in
+            out(c,enca(pair(y,NB),pubA)).
+    in(c,z).
+        if deca(z,privB) = NB then 0 else 0
